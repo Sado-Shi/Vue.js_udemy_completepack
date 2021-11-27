@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div id="app1">
+    <p>{{ message }}</p>
+    <p>{{ name }}</p>
+    <button @click="message = 'changeから変更'">変更</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const data = {
+            el: "#app1",
+      data: {
+        message: 'こんちは！',
+        name: "よしぴー"
+      }
+    }
+
+    const vm = new Vue({
+      el: "#app1",
+      data: data
+    });
+
+    // vm.name = "よしぴー"
+    console.log(data === vm.$data);
+    console.log(vm);
+  </script>
+</body>
+
+</html>
