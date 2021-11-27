@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <div id="app">
-    <p>{{ message }}</p>
-    <p v-text="message"></p>
+    <p>現在{{ number }}回クリックされたわよ</p>
+    <button @[event]="countUp(3)">カウントアップ</button>
+    <p v-on:mousemove="changeMousePosition">マウスを載せてください
+    <span v-on:mousemove.stop>反応しないでください</span></p>
+    <a v-on:click.prevent href="https://google.com">Google</a>
+    <p>X:{{ x }}, Y:{{ y }}</p>
+    <input type="text" v-on:keyup="myAlert">
+    <input type="text" v-model="message">
+    <h1>{{ message }}</h1>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script>
-    const app = new Vue({
+    new Vue({
       el: "#app",
       data: {
-        message: "Hello World!!"
-      }
-    })
+        number: 0,
+        x: 0,
+        y: 0,
+        event: "click",
+        message: "やほ!!"
+      },
+      methods: {
+        countUp: function(num) {
+          this.number += 1 * num
+        },
+        changeMousePosition: function(event) {
+          console.log(event);
+          this.x = event.clientX;
+          this.y = event.clientY;
+        },
+        myAlert: function() {
+          alert("アラート！");
+        }
+      },
+    });
   </script>
 </body>
+
 </html>
