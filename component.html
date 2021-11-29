@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div id="app">
+    <name></name>
+    <name></name>
+    <hr>
+  </div>
+  <div id="app2">
+    <name></name>
+    <name></name>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const component = {
+      data: function () {
+        return {
+          number: 12,
+        }
+      },
+      template: '<p>いいね{{ number }}<button @click="increment">+1</button></p>'
+      ,
+      methods: {
+        increment: function () {
+          this.number += 1;
+        }
+      }
+    }
+
+
+    Vue.component('name');
+
+    new Vue({
+      el: "#app",
+      components: {
+        'name': component
+      }
+    });
+
+    new Vue({
+      el: "#app2",
+    });
+  </script>
+</body>
+
+</html>

@@ -10,30 +10,111 @@
 </head>
 
 <body>
-  <div id="app1">
+  <!-- <div id="app1">
     <p>{{ message }}</p>
     <p>{{ name }}</p>
+    <p>{{ myData }}</p>
     <button @click="message = 'changeから変更'">変更</button>
+  </div> -->
+
+  <div id="app2">
+    <hello></hello>
+  </div>
+  <div id="app3">
+  </div>
+  <div id="app4">
+    <h1>こんにちは{{ name }}</h1>
+    <button @click="name = '太郎さん'">名前を変更</button>
+    <button @click="destroy">インスタンスを破壊</button>
+    <hello></hello>
+    <hello></hello>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script>
-    const data = {
-            el: "#app1",
-      data: {
-        message: 'こんちは！',
-        name: "よしぴー"
-      }
-    }
+    // const data = {
+    //   el: "#app1",
+    //   data: {
+    //     message: 'こんちは！',
+    //     name: "よしぴー"
+    //   }
+    // };
 
-    const vm = new Vue({
-      el: "#app1",
-      data: data
+    // const vm = new Vue({
+    //   el: "#app1",
+    //   data: data,
+    //   computed: {
+    //     myData: function () {
+    //       return this.data;
+    //     }
+    //   },
+    // });
+
+    Vue.component('hello', {
+      template: '<p>ヤッホー！！！</p>'
     });
 
-    // vm.name = "よしぴー"
-    console.log(data === vm.$data);
-    console.log(vm);
+    const vim = new Vue({
+      el: "#app2",
+      data: {
+        nam: "よしぴー"
+      },
+      // template: "<h2>{{ nam }}</h2>"
+    })
+
+
+
+    new Vue({
+      data: {
+        name: 'よしぴ'
+      },
+      render: function (h) {
+        console.log(h('h1', 'こんにちは' + this.name));
+        return h('h1', 'こんにちは' + this.name);
+      },
+    }).$mount("#app3")
+
+    const dir = document.createElement('div');
+    console.log(vim.$el);
+    // console.log(dir);
+    // console.log(h);
+    // console.dir(document);
+
+    new Vue({
+      el: '#app4',
+      data: {
+        name: 'よしぴー'
+      },
+      beforeCreate: function () {
+        console.log('beforeCreate');
+      },
+      created: function () {
+        console.log('created');
+      },
+      beforeMount: function () {
+        console.log('beforeMount');
+      },
+      mounted: function () {
+        console.log('mounted');
+      },
+      beforeUpdate: function () {
+        console.log('beforeUpdate');
+      },
+      updated: function () {
+        console.log('updated');
+      },
+      beforeDestroy: function () {
+        console.log('beforeDestroy');
+      },
+      destroyed: function () {
+        console.log('destroyed');
+      },
+      methods: {
+        destroy: function () {
+          this.$destroy()
+        }
+      },
+    });
   </script>
 </body>
 
